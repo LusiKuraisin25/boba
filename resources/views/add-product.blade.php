@@ -1,0 +1,67 @@
+<x-index-layout>
+     <x-slot:title>{{ $title }}</x-slot>
+     <a href="/products" class="text-xl font-semibold ml-10 mt-10">Back</a>
+     <div class="max-w-[90vw] w-full mx-auto p-10 my-20 shadow-md shadow-slate-500 rounded-lg">
+          <form action="/product/add" method="post" enctype="multipart/form-data">
+               @csrf
+               <div class="flex items-start justify-between">
+                    <div class="flex gap-10">
+                         <div class="flex flex-col gap-5">
+                              <div class="rounded-full w-52 h-52 flex justify-center items-center overflow-hidden shrink-0 ring ring-amber-700 relative">
+                                   <img src="" alt="image preview" id="imagePreview">
+                                   <h1 class="absolute text-white opacity-0 transition-opacity duration-300 hover:opacity-100 bg-black bg-opacity-50 w-full h-full flex justify-center items-center cursor-pointer" onclick="editImage()">
+                                       <i class="fas fa-edit mr-2"></i>Add image
+                                   </h1>
+                               </div>
+                               <input type="file" name="image" onchange="previewImage(event)" id="file" class="invisible">                               
+                         </div>
+                         <div class="grid grid-cols-3 gap-5">
+                              <div class="">
+                                   <h1 class="font-semibold text-xl">Product Name</h1>
+                                   <x-text-input name="name" />
+                              </div>
+                              <div class="">
+                                   <h1 class="font-semibold text-xl">Price</h1>
+                                   <x-text-input name="harga" />
+                              </div>
+                              <div class="">
+                                   <h1 class="font-semibold text-xl">Description</h1>
+                                   <x-text-input name="deskripsi" />
+                              </div>
+                              <div class="">
+                                   <h1 class="font-semibold text-xl">Stock</h1>
+                                   <x-text-input name="stock" type="number" min="0" />
+                              </div>
+                              <div class="">
+                                   <h1 class="font-semibold text-xl">Category</h1>
+                                   <select name="id_category" class="rounded-lg border border-slate-300">
+                                        <option value="">--Choose Category--</option>
+                                        @foreach ($category as $d)
+                                             <option value="{{ $d->id_category }}">{{ $d->name }}</option>
+                                        @endforeach
+                                   </select>
+                              </div>
+                         </div>
+                    </div>
+                    <div>
+                         <x-primary-button type="submit">Simpan</x-primary-button>
+                    </div>
+               </div>
+          </form>
+     </div>
+
+     <script>
+          function editImage() {
+              document.getElementById('file').click();
+          }
+      
+          function previewImage(event) {
+              var reader = new FileReader();
+              reader.onload = function() {
+                  var output = document.getElementById('imagePreview');
+                  output.src = reader.result;
+              }
+              reader.readAsDataURL(event.target.files[0]);
+          }
+      </script>
+</x-index-layout>
