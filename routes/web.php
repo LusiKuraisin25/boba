@@ -55,6 +55,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/product/{id}', [ProductController::class, 'edit']);    
     Route::get('/product/add-product', [ProductController::class, 'create']);    
     Route::put('/product/{id}/edit', [ProductController::class, 'update']);    
+    Route::delete('/product/{id}', [ProductController::class, 'destroy']);    
 });
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

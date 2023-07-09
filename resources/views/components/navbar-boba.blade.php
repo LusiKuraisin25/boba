@@ -3,10 +3,7 @@
 @endphp
 
 <div x-data="{ open: false, option: false }" x-cloak>
-     <nav class="w-screen flex justify-between items-center py-7 bg-amber-950 px-10">
-          @can('admin')
-              <a href=""><i class="fas fa-arrow-left text-white text-xl"></i></a>
-          @endcan
+     <nav class="w-screen flex {{ auth()->user()->role == 'Admin' ? 'justify-end' : 'justify-between' }} items-center py-7 bg-amber-950 px-10">
           @can('user')
           <div>
                <a href="{{ url('') }}">
@@ -47,7 +44,7 @@
      
      <div class="inset-0 fixed text-center p-40 bg-gray-900/30 backdrop-blur-sm z-50" x-show="open">
           <form action="/search" method="get">
-               <div x-on:click.outside="open = false" class="p-10 rounded-lg bg-amber-950/90 border border-amber-600 flex flex-col items-center">
+               <div x-on:click.outside="open = false" :class="{ 'invisible': !open, 'visible': open }" class="p-10 rounded-lg bg-amber-950/90 border border-amber-600 flex flex-col items-center">
                     <input type="search" name="search" id="search" class="p-3 rounded-lg w-full bg-transparent border-gray-300 text-gray-200 focus:outline-amber-600 focus:ring-amber-600 focus:border-amber-600 py-3" placeholder="Search..." autofocus>
                </div>
           </form>

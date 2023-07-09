@@ -1,7 +1,9 @@
 <x-index-layout>
      <x-slot:title>{{ $title }}</x-slot>
-     <a href="/products" class="text-xl font-semibold ml-10 mt-10">Back</a>
      <div class="max-w-[90vw] w-full mx-auto p-10 my-20 shadow-md shadow-slate-500 rounded-lg">
+          <a href="/products">
+               <i class="fas fa-arrow-left text-2xl"></i>
+          </a>
           <form action="/product/{{ $data->id_product }}/edit" method="post" enctype="multipart/form-data">
                @method('put')
                @csrf
@@ -10,13 +12,12 @@
                     <div class="flex gap-10">
                          <div class="flex flex-col gap-5">
                               <div class="rounded-full w-52 h-52 flex justify-center items-center overflow-hidden shrink-0 ring ring-amber-700 relative">
-                                   <img src="{{ asset('storage/' . $data->image) }}" alt="image preview" id="imagePreview1">
-                                   <img src="" alt="image preview" id="imagePreview2" class="hidden">
+                                   <img src="{{ asset('storage/' . $data->image) }}" alt="image preview" id="imagePreview">
                                    <h1 class="absolute text-white opacity-0 transition-opacity duration-300 hover:opacity-100 bg-black bg-opacity-50 w-full h-full flex justify-center items-center cursor-pointer" onclick="editImage()">
                                        <i class="fas fa-edit mr-2"></i>Edit image
                                    </h1>
                                </div>                               
-                              <input type="file" name="image" onchange="previewImage(e)" id="file" class="invisible">
+                              <input type="file" name="image" onchange="previewImage(event)" id="fileEdit" class="invisible">
                          </div>
                          <div class="grid grid-cols-3 gap-5">
                               <div class="">
@@ -55,17 +56,17 @@
 
      <script>
           function editImage() {
-               document.getElementById('file').click()
+               document.getElementById('fileEdit').click()
           }
 
-          function previewImage(e) 
-               document.getElementById('imagePreview1')
+          function previewImage(event) {
+               document.getElementById('imagePreview')
               var reader = new FileReader();
               reader.onload = function() {
                   var output = document.getElementById('imagePreview');
                   output.src = reader.result;
               }
-              reader.readAsDataURL(e.target.files[0]);
+              reader.readAsDataURL(event.target.files[0]);
           }
       </script>
 </x-index-layout>

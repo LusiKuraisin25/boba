@@ -1,7 +1,9 @@
 <x-index-layout>
      <x-slot:title>{{ $title }}</x-slot>
-     <a href="/products" class="text-xl font-semibold ml-10 mt-10">Back</a>
      <div class="max-w-[90vw] w-full mx-auto p-10 my-20 shadow-md shadow-slate-500 rounded-lg">
+          <a href="/products">
+               <i class="fas fa-arrow-left text-2xl"></i>
+          </a>
           <form action="/product/add" method="post" enctype="multipart/form-data">
                @csrf
                <div class="flex items-start justify-between">
@@ -9,7 +11,7 @@
                          <div class="flex flex-col gap-5">
                               <div class="rounded-full w-52 h-52 flex justify-center items-center overflow-hidden shrink-0 ring ring-amber-700 relative">
                                    <img src="" alt="image preview" id="imagePreview">
-                                   <h1 class="absolute text-white opacity-0 transition-opacity duration-300 hover:opacity-100 bg-black bg-opacity-50 w-full h-full flex justify-center items-center cursor-pointer" onclick="editImage()">
+                                   <h1 class="absolute text-white opacity-0 transition-opacity duration-300 hover:opacity-100 bg-black bg-opacity-50 w-full h-full flex justify-center items-center cursor-pointer" onclick="addImage()">
                                        <i class="fas fa-edit mr-2"></i>Add image
                                    </h1>
                                </div>
@@ -51,7 +53,7 @@
      </div>
 
      <script>
-          function editImage() {
+          function addImage() {
               document.getElementById('file').click();
           }
       

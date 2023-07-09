@@ -6,7 +6,6 @@
 <x-index-layout>
     <x-slot:title>{{ $title }}</x-slot>
     <div class="w-screen h-full p-10">
-     <a href="/keranjang" class="text-xl font-semibold">Back</a>
      @if ($cart->count())
           <table class='w-[calc(100vw-20rem)] mx-auto'>
                <thead>

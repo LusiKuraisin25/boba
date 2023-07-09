@@ -1,6 +1,9 @@
 <x-index-layout>
      <x-slot:title>{{ $title }}</x-slot>
-     <div class="max-w-[90vw] w-full mx-auto p-10 my-20 shadow-md shadow-slate-500 rounded-lg">
+     <div class="max-w-[90vw] w-full mx-auto p-10 my-20 shadow-md shadow-slate-500 rounded-lg space-y-3">
+          <a href="/profile">
+               <i class="fas fa-arrow-left text-2xl"></i>
+          </a>
           <form action="/profile/{{ auth()->user()->id }}/edit" method="post" enctype="multipart/form-data">
                @method('patch')
                @csrf
